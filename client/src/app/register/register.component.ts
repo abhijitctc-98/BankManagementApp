@@ -25,23 +25,26 @@ export class RegisterComponent {
     console.log(data);
     this.http.post('http://localhost:6969/api/users/addUser', data).subscribe((res) => {
       this.recData = res;
-    })
+    });
+    this.signupValidator();
+  }
+  signupValidator() {
     if (this.recData.status === true) {
       Swal.fire({  
         position: 'top-end',  
         icon: 'success',  
         title: 'Successfully Logged-in',  
-        showConfirmButton: false,  
-        timer: 1500  
+        showConfirmButton: true,  
+        timer: 2000  
       });
-      this.router.navigate(['/home']);
+      this.router.navigate(['/login']);
     } else {
       Swal.fire({  
         position: 'top-end',  
-        icon: 'warning',  
+        icon: 'error',  
         title: 'Logged-in Failed',  
-        showConfirmButton: false,  
-        timer: 1500  
+        showConfirmButton: true,  
+        timer: 2000  
       });
     }
     this.registerForm.reset();

@@ -31,24 +31,24 @@ export class LoginComponent {
     })
   }
   loginValidator() {
-    this.loginForm.reset();
     if (this.resData.status === true) {
       Swal.fire({  
         position: 'top-end',  
         icon: 'success',  
         title: 'Successfully Logged-in',  
         showConfirmButton: false,  
-        timer: 1500  
+        timer: 2000  
       });
       this.router.navigate(['/home']);
     } else if (this.resData.status === false) {
       Swal.fire({  
         position: 'top-end',  
-        icon: 'warning',  
+        icon: 'error',  
         title: 'Invalid Credentials',  
         showConfirmButton: true,  
-        timer: 1500  
+        timer: 2000  
       });
     }
+    this.loginForm.reset();
   }
 }
