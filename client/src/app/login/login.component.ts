@@ -23,10 +23,14 @@ export class LoginComponent {
   });
   userLogin(data: any) {
     console.log(data);
-    this.http.post('http://localhost:6969/api/users/userLogin', data).subscribe((res) => {
-      console.log(res);
+    this.http.post('http://localhost:6969/api/users/userLogin', data).subscribe((res: any) => {
+      console.log(res['status']);
       this.resData = res;
+      // Callback of Login Validator Function
+      this.loginValidator();
     })
+  }
+  loginValidator() {
     this.loginForm.reset();
     if (this.resData.status === true) {
       Swal.fire({  
