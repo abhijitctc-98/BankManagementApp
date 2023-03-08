@@ -1,0 +1,18 @@
+<div class="container">
+    <h1 style="color: aqua;font-family: cursive;">{{loginTitle}}</h1>
+    <form [formGroup]="loginForm" (ngSubmit)="userLogin(loginForm.value)">
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Email address</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" formControlName="userMailID">
+          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <input type="password" class="form-control" id="exampleInputPassword1" formControlName="userPassword">
+        </div>
+        <div class="mb-3">
+          <a routerLink="/register"><label class="form-check-label" for="exampleCheck1">Click Here to get Registered</label></a>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+</div>
