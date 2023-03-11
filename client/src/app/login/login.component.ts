@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {} from '@angular/common/http';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router'
 import Swal from 'sweetalert2'
@@ -18,9 +18,18 @@ export class LoginComponent {
     }, 4000)
   }
   loginForm = new FormGroup({
-    userMailID: new FormControl(''),
-    userPassword: new FormControl('')
+    userMailID: new FormControl('', [ Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$") ]),
+    userPassword: new FormControl('', [ Validators.required ])
   });
+
+  get MailID() {
+    return this.loginForm.get('userMailID');
+  }
+
+  get Password() {
+    return this.loginForm.get('userPassword');
+  }
+
   userLogin(data: any) {
     console.log(data);
     this.http.post('http://localhost:6969/api/users/userLogin', data).subscribe((res: any) => {

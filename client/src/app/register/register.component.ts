@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http'
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2'
@@ -17,10 +17,24 @@ export class RegisterComponent {
     }, 4000)
   }
   registerForm = new FormGroup({
-    userName: new FormControl(''),
-    userMailID: new FormControl(''),
-    userPassword: new FormControl('')
+    userName: new FormControl('', [ Validators.required ]),
+    userMailID: new FormControl('', [ Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
+    userPassword: new FormControl('', [ Validators.required, Validators.minLength(9) ])
   });
+
+  get Name() {
+    return this.registerForm.get('userName');
+  }
+
+  get MailID() {
+    return this.registerForm.get('userMailID')
+  }
+
+  get Password() {
+    return this.registerForm.get('userPassword')
+  }
+
+  
   userSignup(data: any) {
     console.log(data);
     this.http.post('http://localhost:6969/api/users/addUser', data).subscribe((res) => {
